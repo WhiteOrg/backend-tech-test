@@ -1,4 +1,9 @@
 ﻿using System.Runtime.CompilerServices;
 
 //Great when we want a test project to access project internals
-[assembly:InternalsVisibleTo("TestTest.DataLayer.Tests")]
+[assembly:InternalsVisibleTo("TechTest.DataLayer.Tests")]
+
+namespace TechTest.DataLayer
+{
+    
+}

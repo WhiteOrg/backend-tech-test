@@ -7,20 +7,14 @@ using TechTest.Core.Entities;
 
 namespace TechTest.DataLayer
 {
-    internal class LibrayDataContext : DbContext
+    public class LibraryDataContext : DbContext
     {
-        public LibrayDataContext(DbContextOptions options) : base(options)
+        public LibraryDataContext(DbContextOptions<LibraryDataContext> options) : base(options)
         {
         }
 
-        public LibrayDataContext(DbContextOptions<LibrayDataContext> options) : base(options)
+        public LibraryDataContext()
         {
-            
-        }
-
-        public LibrayDataContext()
-        {
-            
         }
 
         public virtual DbSet<Author> Author { get; set; }
@@ -28,8 +22,8 @@ namespace TechTest.DataLayer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(LibrayDataContext).Assembly);
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(LibraryDataContext).Assembly);
         }
 
         public override int SaveChanges()
@@ -38,22 +32,10 @@ namespace TechTest.DataLayer
             return base.SaveChanges();
         }
 
-        public override int SaveChanges(bool acceptAllChangesOnSuccess)
-        {
-            SetCreatedModifiedOnValues();
-            return base.SaveChanges(acceptAllChangesOnSuccess);
-        }
-
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             SetCreatedModifiedOnValues();
             return base.SaveChangesAsync(cancellationToken);
-        }
-
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = new CancellationToken())
-        {
-            SetCreatedModifiedOnValues();
-            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
 
         private void SetCreatedModifiedOnValues()

@@ -11,9 +11,9 @@ namespace TechTest.DataLayer.Repositories
 {
     internal class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        protected readonly LibrayDataContext Context;
+        protected readonly LibraryDataContext Context;
 
-        public BaseRepository(LibrayDataContext context)
+        public BaseRepository(LibraryDataContext context)
         {
             Context = context;
         }

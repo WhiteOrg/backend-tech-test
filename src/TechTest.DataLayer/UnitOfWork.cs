@@ -6,11 +6,11 @@ using TechTest.DataLayer.Repositories;
 
 namespace TechTest.DataLayer
 {
-    internal sealed class UnitOfWork : IUnitOfWork
+    public sealed class UnitOfWork : IUnitOfWork
     {
-        private readonly LibrayDataContext _context;
+        private readonly LibraryDataContext _context;
 
-        public UnitOfWork(LibrayDataContext dataContext, IBookRepository bookRepository,
+        public UnitOfWork(LibraryDataContext dataContext, IBookRepository bookRepository,
             IBaseRepository<Author> authorRepository)
         {
             _context = dataContext;
@@ -22,7 +22,7 @@ namespace TechTest.DataLayer
         ///     ctor used for UnitTests
         /// </summary>
         /// <param name="dataContext"></param>
-        public UnitOfWork(LibrayDataContext dataContext)
+        public UnitOfWork(LibraryDataContext dataContext)
         {
             _context = dataContext;
             AuthorRepo ??= new BaseRepository<Author>(dataContext);

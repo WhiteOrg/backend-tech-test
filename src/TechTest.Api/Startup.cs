@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using TechTest.DataLayer;
 
 namespace TechTest.Api
 {
@@ -32,6 +35,10 @@ namespace TechTest.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TechTest.Api", Version = "v1" });
             });
+            var dbName = Configuration.GetValue<string>("SqliteDbName");
+            var connectionString =
+                $"Data Source={new FileInfo(Assembly.GetExecutingAssembly().Location).Directory?.FullName}\\{dbName}";
+            services.AddDatabaseContext(connectionString);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

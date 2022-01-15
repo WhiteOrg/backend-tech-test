@@ -10,9 +10,9 @@ namespace TechTest.DataLayer
     {
         public static IServiceCollection AddDatabaseContext(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<LibrayDataContext>(options =>
+            services.AddDbContext<LibraryDataContext>(options =>
             {
-                options.UseInMemoryDatabase($"Library{Guid.NewGuid()}");
+                options.UseSqlite(connectionString, builder => builder.CommandTimeout(30));
             });
 
             return services;

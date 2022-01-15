@@ -6,7 +6,7 @@ namespace TechTest.DataLayer.Repositories
 {
     internal class BookRepository : BaseRepository<Book>, IBookRepository
     {
-        public BookRepository(LibrayDataContext context) : base(context)
+        public BookRepository(LibraryDataContext context) : base(context)
         {
         }
 
