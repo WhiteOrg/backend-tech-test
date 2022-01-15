@@ -1,5 +1,4 @@
-﻿using System.Reflection.Metadata;
-using MediatR;
+﻿using MediatR;
 using TechTest.Core.Entities;
 using TechTest.Core.Interfaces;
 

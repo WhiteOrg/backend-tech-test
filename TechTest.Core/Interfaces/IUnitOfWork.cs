@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.ComTypes;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using TechTest.Core.Entities;
 

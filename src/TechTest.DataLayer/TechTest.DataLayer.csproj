@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.3" />
+    <PackageReference Include="Tappau.DateTimeProvider.Abstractions" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>

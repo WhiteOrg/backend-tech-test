@@ -4,7 +4,7 @@ using TechTest.Core.Entities;
 
 namespace TechTest.Core.Models
 {
-    public class GetAuthorQuery : IRequest<List<Author>>
+    public class GetAuthorQuery : IRequest<List<Author>>, IRequest<Author>
     {
         public GetAuthorQuery(int authorId = 0)
         {

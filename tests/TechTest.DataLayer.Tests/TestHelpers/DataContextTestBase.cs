@@ -2,6 +2,7 @@
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
+using TechTest.Core;
 using TechTest.Core.Entities;
 
 namespace TechTest.DataLayer.Tests.TestHelpers
@@ -20,7 +21,7 @@ namespace TechTest.DataLayer.Tests.TestHelpers
 
         private void InternalSeed()
         {
-            using (var context = new LibraryDataContext(ContextOptions))
+            using (var context = new LibraryDataContext(ContextOptions, new DateTimeProvider()))
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();

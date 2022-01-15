@@ -2,7 +2,7 @@
 
 namespace TechTest.Core.Models
 {
-    public class CreateBookCommand : IRequest
+    public class CreateBookCommand : IRequest<int>
     {
         public string Title { get; set; }
     }

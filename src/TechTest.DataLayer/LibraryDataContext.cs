@@ -1,16 +1,20 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Tappau.DateTimeProvider.Abstractions;
 using TechTest.Core.Entities;
 
 namespace TechTest.DataLayer
 {
     public class LibraryDataContext : DbContext
     {
-        public LibraryDataContext(DbContextOptions<LibraryDataContext> options) : base(options)
+        private readonly IDateTimeProvider _dateTimeProvider;
+
+        public LibraryDataContext(DbContextOptions<LibraryDataContext> options, IDateTimeProvider dateTimeProvider) :
+            base(options)
         {
+            _dateTimeProvider = dateTimeProvider;
         }
 
         public LibraryDataContext()
@@ -32,7 +36,7 @@ namespace TechTest.DataLayer
             return base.SaveChanges();
         }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {
             SetCreatedModifiedOnValues();
             return base.SaveChangesAsync(cancellationToken);
@@ -41,19 +45,20 @@ namespace TechTest.DataLayer
         private void SetCreatedModifiedOnValues()
         {
             var entries = ChangeTracker.Entries()
-                .Where(e => e.Entity is BaseEntity && (
-                    e.State == EntityState.Added || e.State == EntityState.Modified));
+                .Where(e => e.Entity is BaseEntity && e.State is EntityState.Added
+                    or EntityState.Modified);
 
             foreach (var entityEntry in entries)
             {
+                var dateTime = _dateTimeProvider.UtcNow;
                 switch (entityEntry.State)
                 {
                     case EntityState.Modified:
-                        ((BaseEntity) entityEntry.Entity).ModifiedOn = DateTime.UtcNow;
+                        ((BaseEntity)entityEntry.Entity).ModifiedOn = dateTime;
                         break;
                     case EntityState.Added:
-                        ((BaseEntity) entityEntry.Entity).CreatedOn = DateTime.UtcNow;
-                        ((BaseEntity) entityEntry.Entity).ModifiedOn = null;
+                        ((BaseEntity)entityEntry.Entity).CreatedOn = dateTime;
+                        ((BaseEntity)entityEntry.Entity).ModifiedOn = null;
                         break;
                 }
             }

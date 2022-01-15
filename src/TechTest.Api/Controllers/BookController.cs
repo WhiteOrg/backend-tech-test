@@ -40,10 +40,10 @@ namespace TechTest.Api.Controllers
 
             var result = await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetById), new { id = result });
+            return CreatedAtAction(nameof(GetById), new { id = result }, result);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateBookCommand command)
         {
             //This should really be done at a middleware
@@ -57,11 +57,11 @@ namespace TechTest.Api.Controllers
             return AcceptedAtAction(nameof(GetById), new {id = command.Id}, updatedBook);
         }
 
-        [HttpPut("SellBookCopy")]
-        public async Task<IActionResult> SellBookCopy([FromQuery] int bookId)
+        [HttpPost("SellBookCopy")]
+        public async Task<IActionResult> SellBookCopy([FromBody] int bookId)
         {
-            await _mediator.Send(new SellBookCommand(bookId));
-            return AcceptedAtAction(nameof(GetById), new { id = bookId });
+            var result = await _mediator.Send(new SellBookCommand(bookId));
+            return AcceptedAtAction(nameof(GetById), new { id = bookId }, result );
         }
 
         [HttpDelete("{id}")]

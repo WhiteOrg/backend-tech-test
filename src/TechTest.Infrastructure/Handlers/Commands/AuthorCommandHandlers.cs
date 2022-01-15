@@ -8,19 +8,19 @@ using TechTest.Core.Models;
 
 namespace TechTest.Infrastructure.Handlers.Commands
 {
-    public class AuthorCommandHandlers : BaseCommandHandler, IRequestHandler<CreateAuthorCommand>, 
+    public class AuthorCommandHandlers : BaseCommandHandler, IRequestHandler<CreateAuthorCommand, int>, 
         IRequestHandler<UpdateAuthorCommand, Author>, IRequestHandler<DeleteAuthorCommand>
     {
         public AuthorCommandHandlers(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
 
-        public async Task<Unit> Handle(CreateAuthorCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateAuthorCommand request, CancellationToken cancellationToken)
         {
             var newAuthor = new Author() { Name = request.Name };
             await UnitOfWork.AuthorRepo.AddAsync(newAuthor);
             await UnitOfWork.SaveAsync(cancellationToken);
-            return Unit.Value;
+            return newAuthor.Id;
         }
 
         public async Task<Author> Handle(UpdateAuthorCommand request, CancellationToken cancellationToken)

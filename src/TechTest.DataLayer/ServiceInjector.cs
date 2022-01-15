@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using TechTest.Core.Interfaces;
 using TechTest.DataLayer.Repositories;
@@ -20,9 +19,9 @@ namespace TechTest.DataLayer
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-            services.AddScoped<IBookRepository, BookRepository>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddTransient<IBookRepository, BookRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             return services;
         }
     }

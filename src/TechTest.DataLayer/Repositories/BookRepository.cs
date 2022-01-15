@@ -15,6 +15,7 @@ namespace TechTest.DataLayer.Repositories
             var book = await GetAsync(bookId);
             book.SalesCount++;
             Update(book);
+            
         }
     }
 }

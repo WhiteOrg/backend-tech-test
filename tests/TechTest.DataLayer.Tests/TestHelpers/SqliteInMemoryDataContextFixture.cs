@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using TechTest.Core;
 using TechTest.Core.Entities;
 using TechTest.Core.Interfaces;
 
@@ -18,7 +19,7 @@ namespace TechTest.DataLayer.Tests.TestHelpers
                 .Options)
         {
             _connection = RelationalOptionsExtension.Extract(ContextOptions).Connection;
-            UoW = new UnitOfWork(new LibraryDataContext(ContextOptions));
+            UoW = new UnitOfWork(new LibraryDataContext(ContextOptions, new DateTimeProvider()));
         }
 
         public IUnitOfWork UoW { get; }
