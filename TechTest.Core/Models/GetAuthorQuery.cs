@@ -6,7 +6,7 @@ namespace TechTest.Core.Models
 {
     public class GetBookQuery : IRequest<List<Book>>
     {
-        public GetBookQuery(int bookId)
+        public GetBookQuery(int bookId = 0)
         {
             Id = bookId;
         }
