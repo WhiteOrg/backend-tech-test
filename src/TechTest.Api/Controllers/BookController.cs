@@ -52,9 +52,9 @@ namespace TechTest.Api.Controllers
                 return BadRequest();
             }
 
-            _ = await _mediator.Send(command);
+            var updatedBook = await _mediator.Send(command);
 
-            return AcceptedAtAction(nameof(GetById), new {id = command.Id});
+            return AcceptedAtAction(nameof(GetById), new {id = command.Id}, updatedBook);
         }
 
         [HttpPut("SellBookCopy")]

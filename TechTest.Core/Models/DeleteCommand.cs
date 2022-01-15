@@ -1,8 +1,9 @@
-﻿using TechTest.Core.Interfaces;
+﻿using MediatR;
+using TechTest.Core.Interfaces;
 
 namespace TechTest.Core.Models
 {
-    public abstract class DeleteCommand : IDeleteCommand
+    public abstract class DeleteCommand : IDeleteCommand, IRequest
     {
         public DeleteCommand(int id)
         {

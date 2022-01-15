@@ -1,8 +1,10 @@
-﻿using TechTest.Core.Interfaces;
+﻿using MediatR;
+using TechTest.Core.Entities;
+using TechTest.Core.Interfaces;
 
 namespace TechTest.Core.Models
 {
-    public class UpdateBookCommand : IUpdateCommand
+    public class UpdateBookCommand : IUpdateCommand, IRequest<Book>
     {
         public string Title { get; set; }
 

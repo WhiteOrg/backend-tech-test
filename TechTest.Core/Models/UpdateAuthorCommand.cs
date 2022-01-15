@@ -1,9 +1,11 @@
 ﻿using System.Reflection.Metadata;
+using MediatR;
+using TechTest.Core.Entities;
 using TechTest.Core.Interfaces;
 
 namespace TechTest.Core.Models
 {
-    public class UpdateAuthorCommand : IUpdateCommand
+    public class UpdateAuthorCommand : IUpdateCommand, IRequest<Author>
     {
         public string Name { get; set; }
 

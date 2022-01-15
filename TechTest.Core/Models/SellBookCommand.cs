@@ -1,9 +1,8 @@
 ﻿using MediatR;
-using TechTest.Core.Entities;
 
 namespace TechTest.Core.Models
 {
-    public class SellBookCommand : IRequest<Book>
+    public class SellBookCommand : IRequest
     {
         public SellBookCommand(int bookId)
         {

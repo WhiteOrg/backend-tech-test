@@ -1,6 +1,8 @@
-﻿namespace TechTest.Core.Models
+﻿using MediatR;
+
+namespace TechTest.Core.Models
 {
-    public class CreateAuthorCommand
+    public class CreateAuthorCommand : IRequest
     {
         public string Name { get; set; }
     }
