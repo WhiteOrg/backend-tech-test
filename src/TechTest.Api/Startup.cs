@@ -38,14 +38,10 @@ namespace TechTest.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TechTest.Api", Version = "v1" });
             });
             var dbName = Configuration.GetValue<string>("SqliteDbName");
-            //var connectionString =
-            //    $"Data Source={new FileInfo(Assembly.GetExecutingAssembly().Location).Directory?.FullName}\\{dbName}";
-            var connectionString = "Filename=:memory:";
-            //services.AddDatabaseContext(connectionString);
-            services.AddDbContext<LibraryDataContext>(options =>
-            {
-                options.UseInMemoryDatabase("Library");
-            });
+            var connectionString =
+                $"Data Source={new FileInfo(Assembly.GetExecutingAssembly().Location).Directory?.FullName}\\{dbName}";
+
+            services.AddDatabaseContext(connectionString);
 
             services.AddRepositories();
 
@@ -59,13 +55,6 @@ namespace TechTest.Api
             });
         }
 
-        private static DbConnection AsInMemoryDatabase()
-        {
-            var connection = new SqliteConnection("Filename=:memory:");
-            connection.Open();
-            return connection;
-        }
-
         private void LoadStandingData(IApplicationBuilder app, IWebHostEnvironment env)
         {
             using (var services = app.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope())
@@ -73,7 +62,7 @@ namespace TechTest.Api
                 var context = services?.ServiceProvider.GetRequiredService<LibraryDataContext>();
                 if (env.IsDevelopment())
                 {
-                    //context?.Database.EnsureDeleted();
+                    context?.Database.EnsureDeleted();
                 }
 
                 context?.Database.EnsureCreated();
