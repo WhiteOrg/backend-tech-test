@@ -57,6 +57,13 @@ namespace TechTest.Api.Controllers
             return AcceptedAtAction(nameof(GetById), new {id = command.Id});
         }
 
+        [HttpPut("SellBookCopy")]
+        public async Task<IActionResult> SellBookCopy([FromQuery] int bookId)
+        {
+            await _mediator.Send(new SellBookCommand(bookId));
+            return AcceptedAtAction(nameof(GetById), new { id = bookId });
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
