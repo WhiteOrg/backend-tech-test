@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices.ComTypes;
+using System.Threading;
+using System.Threading.Tasks;
 using TechTest.Core.Entities;
 
 namespace TechTest.Core.Interfaces
@@ -9,5 +11,6 @@ namespace TechTest.Core.Interfaces
         IBookRepository BookRepo { get; }
         
         Task<int> SaveAsync();
+        Task<int> SaveAsync(CancellationToken token);
     }
 }

@@ -5,6 +5,6 @@ namespace TechTest.Core.Interfaces
 {
     public interface IBookRepository : IBaseRepository<Book>
     {
-        Task IncreaseSalesCount(int increaseAmount = 1);
+        Task IncreaseSalesCount(int bookId, int increaseAmount = 1);
     }
 }
