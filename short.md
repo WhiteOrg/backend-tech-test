@@ -3,7 +3,7 @@
 Hi, welcome to the tech challenge. Challenge should take 10 mins. Please don't use any compiler or IDE when answering questions.
 
 ## The Challenge
-- What do you expect for the output and what is the cause of the difference between s1 and s2?
+1. What do you expect for the output and what is the cause of the difference between s1 and s2?
 ```csharp
 using System;
 using System.Collections;
@@ -60,11 +60,11 @@ public class Program
 }
 ```
 
-- How to write and use extension methods 
+2. How to write and use extension methods 
 
-- What are the differences between IEnumerable and IQueryable interfaces?
+3. What are the differences between IEnumerable and IQueryable interfaces?
 
-- What is the output
+4. What is the output
 ```csharp
 using System;
 public class Program 
@@ -86,8 +86,7 @@ public class Program
 }
 ```
 
-- Rewrite this code block without `using` statement
-
+5. Rewrite this code block without `using` statement
 ```csharp
 using System;
 using System.Data.SqlClient;
@@ -105,7 +104,7 @@ public class Program
 
 ```
 
-- What do you expect for the output and what is the cause of the difference between s1 and s2?
+6. What do you expect for the output and what is the cause of the difference between s1 and s2?
 ```csharp
 using System;
 using System.Collections.Generic;
@@ -158,7 +157,7 @@ public class Program
 }
 ```
 
-- 
+7.  What is the output?
 ```csharp
 using System;
 
@@ -207,7 +206,7 @@ public class DrawDemo
 }
 ```
 
-- If you find any potential bugs, fix the code
+8. If you find any potential bugs, fix the code
 ```csharp
 [HttpGet("{id}")]
 public async Task<ActionResult<object>> GetTodoItem(long id)
@@ -220,7 +219,7 @@ public async Task<ActionResult<object>> GetTodoItem(long id)
 }
 ```
 
-- Explain difference between 2 methods
+9. Explain difference between 2 methods
 ```csharp
 using System;
 using System.Data.SqlClient;
