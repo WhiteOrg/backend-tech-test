@@ -257,3 +257,17 @@ public class Program
 	}
 }
 ```
+
+10. What is the output?
+```csharp
+using System;
+public class Program
+{
+  public static void Main() 
+  {
+     int i = 0;
+     Console.WriteLine(i++);
+     Console.WriteLine(++i);
+  }
+}
+```
