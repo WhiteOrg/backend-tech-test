@@ -90,16 +90,16 @@ public class Program
 ```csharp
 using System;
 using System.Data.SqlClient;
-public class Program
+public class Program 
 {
-	public static void Main(string[] args)
-	{
-		using(SqlConnection con = new SqlConnection("conStr"))
-		{
-        //code
-        //code
-		}
-	}
+  public static void Main(string[] args) 
+  {
+    using(SqlConnection con = new SqlConnection("conStr")) 
+    {
+      //code
+      //code
+    }
+  }
 }
 
 ```
@@ -209,13 +209,13 @@ public class DrawDemo
 8. If you find any potential bugs, fix the code
 ```csharp
 [HttpGet("{id}")]
-public async Task<ActionResult<object>> GetTodoItem(long id)
+public async Task<ActionResult<object>> GetTodoItem(long id) 
 {
-    using(var client = new HttpClient())
-    {
-        var result = await client.GetAsync($"https://stech.com/items/{id}");
-        return await result.Content.ReadAsStringAsync();
-    }
+  using(var client = new HttpClient()) 
+  {
+    var result = await client.GetAsync($"https://stech.com/items/{id}");
+    return await result.Content.ReadAsStringAsync();
+  }
 }
 ```
 
@@ -223,38 +223,35 @@ public async Task<ActionResult<object>> GetTodoItem(long id)
 ```csharp
 using System;
 using System.Data.SqlClient;
-public class Program
+public class Program 
 {
-	public async Task<IEnumerable<object>> GetObjectListAsync()
-	{
-		using(SqlConnection con = new SqlConnection("conStr"))
-		{
-        await con.OpenAsync();
+  public async Task<IEnumerable<object>> GetObjectListAsync() 
+  {
+    using(SqlConnection con = new SqlConnection("conStr")) 
+    {
+      await con.OpenAsync();
 
-        //code
-        //code
+      //code
+      //code
 
-        return await new SqlCommand("QUERY").ExecuteScalarAsync();
-		}
-	}
+      return await new SqlCommand("QUERY").ExecuteScalarAsync();
+    }
+  }
 
+  public async Task<IEnumerable<object>> GetObjectList() 
+  {
+    using(SqlConnection con = new SqlConnection("conStr")) 
+    {
+      var task = con.OpenAsync();
+      task.Result;
 
+      //code
+      //code
 
-  
-	public async Task<IEnumerable<object>> GetObjectList()
-	{
-		using(SqlConnection con = new SqlConnection("conStr"))
-		{
-        var task = con.OpenAsync();
-        task.Result;
-
-        //code
-        //code
-
-        object commandTask = new SqlCommand("QUERY").ExecuteScalarAsync();
-        return commandTask.Result;
-		}
-	}
+      object commandTask = new SqlCommand("QUERY").ExecuteScalarAsync();
+      return commandTask.Result;
+    }
+  }
 }
 ```
 
