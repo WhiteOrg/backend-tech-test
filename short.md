@@ -59,10 +59,13 @@ public class Program
   }
 }
 ```
+ZG: Method A will be slower that method B because it uses type agnostic ArrayList and does explicit type casting.
 
 2. How to write and use extension methods 
+ZG: Extension methods are implemented in a static class as a static method which accepts as a first parameter the type we want to extend but with "this" keyword before the type. You can use the extension method by adding using of that static class to the place you want to use the method. Extension methods are used as any other public method of an instance from the extended type.
 
 3. What are the differences between IEnumerable and IQueryable interfaces?
+ZG: IQueryable extends IEnumberable but has an additional methods which works with expression trees. IQueryable usually works with external data sources like databases whether IEnumerable works with in-memory data collections. 
 
 4. What is the output
 ```csharp
@@ -85,6 +88,9 @@ public class Program
   }
 }
 ```
+ZG: Static constructor will be executed first and instance constructor is not called anywhere. This leads to the following result:
+"Static constructor"
+"Main"
 
 5. Rewrite this code block without `using` statement
 ```csharp
@@ -94,10 +100,15 @@ public class Program
 {
   public static void Main(string[] args) 
   {
-    using(SqlConnection con = new SqlConnection("conStr")) 
-    {
-      //code
-      //code
+ 	var connection = new SqlConnection("conStr");
+    try {
+    	// use connection here;
+	//
+    }
+    catch {
+    }
+    finally {
+     connection.Dispose();
     }
   }
 }
@@ -156,6 +167,7 @@ public class Program
   }
 }
 ```
+ZG: I expect second timer to be slighly slower and size of the list to be slighly larger than the array because list is a dynamic structure where each element holds the address of the next element in the list. Array has the initial address of the first element in the list only.
 
 7.  What is the output?
 ```csharp
@@ -205,6 +217,13 @@ public class DrawDemo
   }
 }
 ```
+ZG: Each class overrides Draw method of the parent class except Rectangle which uses new keyword which creates new method with same name Draw and do not override the method from the parent class. There is an array of DrawingObject instances which means that the Rectangle instance will be casted to DrawingObject instance and calling Draw method will return "I am a drawing object." from the DrawingObject class.
+I expect result to be :
+"I am a Triangle."
+"I am a Circle."
+"I am a drawing object."
+"I am a drawing object."
+
 
 8. If you find any potential bugs, fix the code
 ```csharp
@@ -218,6 +237,7 @@ public async Task<ActionResult<object>> GetTodoItem(long id)
   }
 }
 ```
+ZG: I am not sure if that is the purpose of the task but I would not use using for HttpClient. I would use a single instance of the httpClient instead of creating and disposing it for every request. Also before .NET 5 result.Content might be null (in .NET 5 Content is always an object but could be empty) which will cause an NullPointerException. HttpClient class has a method GetStringAsync which could be used in this case instead of getting result and then get the content from it.
 
 9. Explain difference between 2 methods
 ```csharp
@@ -254,6 +274,9 @@ public class Program
   }
 }
 ```
+ZG: First method uses async programming. When the code reach the first await line the execution thread will execute it and will be released and execution of that method will be paused at this line until OpenAsync method returns. When that happen another free thread will continue execution of the current method and when it reach second await method it will execute it and the method will be paused again and current thread released. When ExecuteScalarAsync method returns another available thread will continue execution of the current method.
+
+Second method is synchronious and the execution thread will not be relased when the code reach the line var task = con.OpenAsync(); because task is just a reference to a Task object which will be executed when code reach task.Result but the current thread won't be released but it will just wait for the result. Same behaviour will happen when the code reach second async Task ExecuteScalarAsync.
 
 10. What is the output?
 ```csharp
@@ -268,3 +291,5 @@ public class Program
   }
 }
 ```
+
+ZG: 0, 2
